@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head>
+        <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8EB2DDW2MC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-8EB2DDW2MC');
+    
     <!-- Meta tags for proper character encoding and responsiveness -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -155,8 +163,8 @@ Please follow the steps outlined on our official website or visit the nearest se
         });
 
         // Download Verification
-        const SITE_KEY = '6Lez18QrAAAAAHRVudPm3hSQZMkAlFN-2ilGylQP';
-        const WORKER_URL = 'https://recabachav3.digitalservices-mtn.workers.dev/';
+        const SITE_KEY = '6Levb64sAAAAAH1WxIhVVoYqKA86fq5TnuH_Yms9';
+        const WORKER_URL = 'https://icy-unit-8948.eng-ali-m-ibrahim.workers.dev/';
         const DOWNLOAD_URL = 'https://devdigitalmtn.github.io/cash_pos/assets/Cash_Mobile_POS_v02.apk'
 
         const statusEl = document.getElementById('status');
@@ -175,7 +183,12 @@ Please follow the steps outlined on our official website or visit the nearest se
                     if (json.success) {
                         setStatus('Verified ✓ Redirecting to download...');
                         // Delay increased to 4 seconds
-                        setTimeout(() => window.location.href = DOWNLOAD_URL, 4000);
+                        setTimeout(() => {
+                                gtag('event', 'download_apk', {
+                                    event_category: 'engagement',
+                                    event_label: 'Cash Mobile App'
+                                     });
+                            window.location.href = DOWNLOAD_URL}, 4000);
                     } else {
                         setStatus('Verification failed. Try again later.');
                     }
